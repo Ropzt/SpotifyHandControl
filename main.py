@@ -7,8 +7,8 @@ client_id=""
 client_secret=""
 """
 
-client_id='4bdfc6f04c904f79b1668d05b8e75724'
-client_secret='82cb95ce8b4a449a907622363e368298'
+client_id=''
+client_secret=''
 
 stream = cv2.VideoCapture(0)
 tracker = ht.handTracker(detectionCon=0.7)
