@@ -1,0 +1,18 @@
+-Pour commencer, il vous faudra installer le package spotipy :
+
+	pip install spotipy
+
+-Vous devrez ensuite vous rendre à cette adresse :
+	https://developer.spotify.com/dashboard
+
+-Connectez vous à votre compte Spotify, ou créez-en un.
+-Acceptez les conditions d'utilisation du Spotify for Developpers.
+
+-Allez dans dashboard et créez une application.
+-Dans EDIT SETTINGS, ajouter https://example.com/callback/ dans Redireect URIs et cliquez sur Add.
+-Copiez le Client ID et le Client Secret de votre application dans le fichier main.py
+
+-Lancez main.py
+-Vous allez être redirigé sur une page, accepter l'identification.
+-Vous allez de nouveau être redirigé sur une page, copiez l'url.
+-Collez l'url dans l'interpreteur python et cliquez sur ENTER.
