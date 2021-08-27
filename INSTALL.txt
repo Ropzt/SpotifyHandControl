@@ -1,12 +1,15 @@
--Pour commencer, il vous faudra installer le package spotipy :
+-Pour commencer, il vous faudra installer les package OpenCV, Mediapipe et Spotipy :
 
+	pip install opencv-python
+	pip install mediapipe
 	pip install spotipy
 
 -Vous devrez ensuite vous rendre à cette adresse :
+
 	https://developer.spotify.com/dashboard
 
 -Connectez vous à votre compte Spotify, ou créez-en un.
--Acceptez les conditions d'utilisation du Spotify for Developpers.
+-Acceptez les conditions d'utilisation de Spotify for Developpers.
 
 -Allez dans dashboard et créez une application.
 -Dans EDIT SETTINGS, ajouter https://example.com/callback/ dans Redireect URIs et cliquez sur Add.
