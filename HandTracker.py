@@ -4,6 +4,13 @@ import mediapipe as mp
 
 class handTracker():
     def __init__(self, mode=False, maxHands=1, detectionCon=0.5,trackCon=0.5):
+        """
+        Cette fonction initialise l'objet qui controllera les fonctions de récupération des points de la main à partir de l'image.
+        :param mode:
+        :param maxHands: le nombre maximal de mains que le programme acceptera de reconnaitre.
+        :param detectionCon:
+        :param trackCon:
+        """
         self.mode=mode
         self.maxHands=maxHands
         self.detectionCon =detectionCon
@@ -15,17 +22,28 @@ class handTracker():
         self.pouceWasDown = False
 
     def findHands(self, frameRGB):
+        """
+        Cette fonction s'occupe de la récupération de la liste des coordonnées x et y des 21 points de la main.
+        :param frameRGB: l'image qui sera analysée.
+        :return: la liste des coordonnées x et y des 21 points de la main
+        """
         self.resultat = self.hands.process(frameRGB)
         markList=[]
         if self.resultat.multi_hand_landmarks:
             handLms = self.resultat.multi_hand_landmarks[0]
             for id, lm in enumerate(handLms.landmark):
                 h, w, c = frameRGB.shape
-                cx, cy = int(lm.x * w), int(lm.y * h)
+                cx, cy = int(lm.x * w), int(lm.y * h) #conversion des coordonnées relatives en coordonnées absolues.
                 markList.append([id,cx,cy])
         return markList
 
     def process(self, spotifyControl, markList):
+        """
+        Cette fonction s'occupe de l'exécution des différentes fonction du module SpotifyHandController en fonction des événements lancés par l'utilisateur.
+        Elle empeche les événements de s'activer à chaque frame (30 fois par seconde) en demandant à ce que l'événement soit terminé pour pouvoir être réactivé.
+        :param spotifyControl: l'objet de controle du module SpotifyHandController.
+        :param markList: la liste des coordonnées x et y des 21 points de la main
+        """
         ##Etat du petit doigt
         if markList[20][2] > markList[18][2]:
             self.petitDoigtDown = True
@@ -65,19 +83,3 @@ class handTracker():
         self.indexWasDown = self.indexDown
         self.pouceWasDown = self.pouceDown
 
-
-def main():
-    stream = cv2.VideoCapture(0)
-    tracker = handTracker()
-    while True :
-        success, frame = stream.read()
-        frameRGB = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        markList = tracker.findHands(frameRGB)
-        if len(markList) != 0:
-            print(markList[4])
-        cv2.imshow("Display", frameRGB)
-        cv2.waitKey(1)
-
-
-if __name__ == "__main__":
-    main()
